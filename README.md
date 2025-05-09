@@ -1,0 +1,16 @@
+# Challenge: Experiência interativa
+
+Esse repositório faz parte da atividade "Transição do Editor Web p5.js para Programação Web com HTML e JavaScript" proposta pela cadeira.
+
+ Algumas sugestões de desafios a serem implementados:
+
+- **Múltiplos objetos animados:** Crie mais formas geométricas (círculos, retângulos, etc.) com movimentos independentes. Por exemplo, você pode fazer um círculo se mover horizontalmente de um lado a outro (com efeito “ping-pong” ao atingir as bordas) e um quadrado se mover verticalmente, ou ainda objetos seguindo trajetórias diagonais.
+- **Interação via teclado:** Implemente controles que permitam ao usuário influenciar a animação. Por exemplo, use as setas do teclado para mover um objeto (dica: a função `keyIsDown(código)` do p5.js permite verificar se determinada tecla está pressionada, como `keyIsDown(LEFT_ARROW)` para a seta esquerda). Você pode fazer um personagem ou forma se deslocar pelo **canvas** conforme as teclas são pressionadas.
+- **Interação via mouse:** Além do movimento do mouse, explore cliques e arrastes. Por exemplo, ao clicar em uma posição, fazer surgir uma nova forma naquele ponto, ou alterar a direção de movimento de algum elemento. A p5.js oferece funções como `mousePressed()` (evento de clique) ou a variável booleana `mouseIsPressed` (que já usamos) para ajudar nisso.
+- **Uso de laços para repetição:** Se quiser desenhar padrões com muitas formas, evite repetir código manualmente – utilize um **laço** `for`. A instrução `for` cria um loop que permite executar um bloco de código várias vezes em sequência ([for - JavaScript | MDN](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Statements/for#:~:text=A%20instru%C3%A7%C3%A3o%20,de%20declara%C3%A7%C3%B5es%20executadas%20em%20sequ%C3%AAncia)). Por exemplo, você pode desenhar uma fileira de 10 círculos ou criar estrelas espalhadas aleatoriamente usando um laço dentro de `draw()`. *(Lembre-se de controlar bem as condições do loop para não travar o programa; um `for` usual possui uma inicialização, uma condição de continuação e um incremento, e.g.: `for (let i = 0; i < 10; i++) { /* desenhar algo */ }`.)*
+
+## Referências
+
+- **p5.js (site oficial)** – Documentação completa da biblioteca, com referências de todas as funções e inúmeros exemplos: [https://p5js.org](https://p5js.org/) (inclui uma seção *Reference* e tutoriais introdutórios).
+- **MDN Web Docs – Guia JavaScript (pt-BR)** – Guia oficial da Mozilla sobre JavaScript, cobrindo desde conceitos básicos de tipos, variáveis, condicionais e laços, até tópicos avançados: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript (veja especialmente as seções de *“Tutorial”* e *“Guia de JavaScript”* para iniciantes).
+- **MDN Web Docs – Tutorial do Canvas (pt-BR)** – Série de artigos que explicam o uso do elemento `<canvas>` do HTML5 e da API de gráficos 2D do navegador: https://developer.mozilla.org/pt-BR/docs/Web/API/Canvas_API/Tutorial (útil para entender o fundamento pelo qual o p5.js desenha na tela, abordando desenho de formas, texto, animações básicas e manipulação do canvas).
