@@ -10,11 +10,11 @@ const TAM = 40,
 
 function setup() {
   let canvas = createCanvas(1000, 480);
-  canvas.parent('container-sketch');
+  canvas.parent('container-sketch')
   circX = width / 2;
   circSpeedX = SPEED;
-  sqY = height / 2;
-  sqSpeedY = SPEED;
+  quadY = height / 2;
+  quadSpeedY = SPEED;
   triX = 0;
   triY = 0;
   triSpeedX = SPEED * 0.7;
@@ -44,11 +44,11 @@ function draw() {
 
   //Quadrado se movimentando
   fill(250, 100, 150);
-  square(width / 2 - TAM * 4, sqY, TAM);
-  sqY += sqSpeedY;
+  square(width / 2 - TAM * 4, quadY, TAM);
+  quadY += quadSpeedY;
   //Evita que ele ultrapasse os limites da tela e só inverte a direção pela vel
-  if (sqY > height - TAM || sqY < 0) {
-    sqSpeedY *= -1;
+  if (quadY > height - TAM || quadY < 0) {
+    quadSpeedY *= -1;
   }
 
   //Triângulo
