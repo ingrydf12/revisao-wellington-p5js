@@ -11,6 +11,11 @@ No p5, nativamente, é disponibilizado uma classe **p5.Vector**. Mas o que é um
 Lidar com vetores e suas operações (push, pop, etc.) além de conceitos como detecção de colisão básica, gravidade, interatividade, iteração, configuração de ambiente, utilização de Javascript Vanilla.
 
 
+### Notas
+- Foi corrigido a parte das colisões com as bordas, usando constrain pra limitar os números das posições das bolinhas. 
+- Foi feito a colisão entre bolinhas usando o cálculo de overlap e cópias dos vetores junto a função normalize do p5 para identificar melhor as posições e fazer uma colisão perfeita.
+- A interação é feita por mouse e esta também adiciona mais bolinhas ao sketch.
+
 ### Referências do professor
 
 1. **p5.js Reference**
