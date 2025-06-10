@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ordenação em tabela</title>
+    <link rel="stylesheet" href="./styles/styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Ordenação e algoritmo em tabela</h1>
+      <h4>Pesquisa e ordenação por nome em HTML.</h4>
+    </header>
+    <div class="tabela-container">
+      <table id="tabela">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Idade</th>
+          </tr>
+        </thead>
+
+        <tbody id="tablebody"></tbody>
+      </table>
+
+      <button id="ordena-nome" onclick="ordenarTabela()">
+        Ordenar por nome
+      </button>
+
+      <input
+        type="text"
+        id="busca"
+        onkeyup="buscarTabela()"
+        placeholder="Buscar por nome"
+      />
+    </div>
+    <script>
+      let pessoas = [
+        { nome: "Carlos", idade: 30 },
+        { nome: "Ana", idade: 25 },
+        { nome: "Bruno", idade: 28 },
+        { nome: "Ana", idade: 22 },
+        { nome: "João", idade: 18 },
+      ];
+      function criarTabela(dados) {
+        const bodyTable = document.getElementById("tablebody");
+
+        dados.forEach((item) => {
+          const linha = document.createElement("tr");
+          Object.values(item).forEach((valor) => {
+            const td = document.createElement("td");
+            td.textContent = valor;
+            linha.appendChild(td);
+          });
+          bodyTable.appendChild(linha);
+        });
+      }
+
+      criarTabela(pessoas);
+
+      function ordenarTabela() {
+        let bodyTable = document.getElementById("tablebody");
+        Array.from(bodyTable.rows)
+          .sort((a, b) =>
+            a.cells[0].textContent.localeCompare(b.cells[0].textContent)
+          )
+          .forEach((tr) => bodyTable.appendChild(tr));
+      }
+
+      function buscarTabela() {
+        let filtro = document.getElementById("busca").value.toUpperCase(); //Pega o valor maiúsculo aqui também pra funcionar a busca independente do input
+        let tabela = document.getElementById("tablebody");
+
+        //Aqui to transformando as linhas da tabela em array e iterando elas
+        Array.from(tabela.rows).forEach((row) => {
+          row.style.display = row.cells[0].textContent
+            .toUpperCase() // Isso aqui é pra deixar insensível, já que funciona a busca pra todas as palavras como maiúsculas
+            .includes(filtro)
+            ? ""
+            : "none";
+        });
+      }
+    </script>
+  </body>
+</html>
