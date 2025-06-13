@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ordenação em tabela</title>
   <link rel="stylesheet" href="./styles/styles.css" />
 </head>
-
 <body>
   <header>
     <h1>Ordenação e algoritmo em tabela</h1>
@@ -17,11 +15,11 @@
     <div class="metodos-ordenacao">
       <input type="text" id="busca" onkeyup="buscarTabela()" placeholder="Buscar por nome" />
 
-      <button id="ordena-nome" onclick="ordenarPorNome()">
+      <button id="ordena-nome" onclick="ordenacao(0)">
         Ordenar por nome
       </button>
 
-      <button id="ordena-nome" onclick="ordenarPorIdade()">
+      <button id="ordena-nome" onclick="ordenacao(1)">
         Ordenar por idade
       </button>
     </div>
@@ -33,13 +31,15 @@
             <th>Idade</th>
           </tr>
         </thead>
-  
+
         <tbody id="tablebody" rows="5" column="50"></tbody>
       </table>
     </div>
 
-    <div class="pagination">
-      
+    <div class="paginacao">
+      <button onclick="paginaAnterior()" id="back-button">⬅ Anterior</button>
+      Página <span id="paginaAtual">1</span> de <span id="totalPaginas">1</span>
+      <button onclick="proximaPagina()">Próxima ➡</button>
     </div>
   </main>
   <script>
@@ -52,11 +52,13 @@
       { nome: "Ana", idade: 27 },
       { nome: "Joãozinho", idade: 15 }
     ];
-    let limit = 5;
-    let bodyTable = document.getElementById("tablebody");
+    let currentPage = 1;
+    let limitPage = 5;
+    const bodyTable = document.getElementById("tablebody");
+    let backButton = document.querySelector("#back-button");
 
-    function criarTabela(dados) {
-      const bodyTable = document.getElementById("tablebody");
+    function renderizarTabela(dados) {
+      bodyTable.innerHTML = "";
 
       dados.forEach((item) => {
         const linha = document.createElement("tr");
@@ -69,22 +71,38 @@
       });
     }
 
-    criarTabela(pessoas);
-
-    function ordenarPorNome() {
+    function ordenacao(cell) {
       Array.from(bodyTable.rows)
         .sort((a, b) =>
-          a.cells[0].textContent.localeCompare(b.cells[0].textContent)
+          a.cells[cell].textContent.localeCompare(b.cells[cell].textContent)
         )
         .forEach((tr) => bodyTable.appendChild(tr));
     }
 
-    function ordenarPorIdade() {
-      Array.from(bodyTable.rows)
-        .sort((a, b) =>
-          a.cells[1].textContent.localeCompare(b.cells[1].textContent)
-        )
-        .forEach((tr) => bodyTable.appendChild(tr));
+    function paginaAnterior() {
+      if (currentPage != 1) {
+        currentPage--;
+        atualizarPaginacao();
+      }
+    }
+
+    function proximaPagina() {
+      currentPage++;
+      atualizarPaginacao();
+    }
+
+    function atualizarPaginacao() {
+      const totalPaginas = Math.ceil(pessoas.length / limitPage);
+
+      paginaAtual = Math.max(1, Math.min(currentPage, totalPaginas));
+
+      document.getElementById('paginaAtual').innerText = paginaAtual;
+      document.getElementById('totalPaginas').innerText = totalPaginas;
+
+      const inicio = (paginaAtual - 1) * limitPage;
+      const fim = inicio + limitPage;
+
+      renderizarTabela(pessoas.slice(inicio, fim));
     }
 
     function buscarTabela() {
@@ -100,6 +118,7 @@
           : "none";
       });
     }
+    atualizarPaginacao();
   </script>
 </body>
 
